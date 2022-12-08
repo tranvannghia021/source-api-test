@@ -25,7 +25,13 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('email','password');
+        $credentials = [
+            'user-agent'=>$request->header('user-agent'),
+            'x-forwarded-for'=>$request->header('x-forwarded-for'),
+            'email' => $request->email,
+            'password' => $request->password
+        
+        ];
 
         if (! $token = auth()->attempt($credentials)) {
             return $this->apiResponse([],'Account is invalid',false,422);
