@@ -26,8 +26,6 @@ class AuthController extends Controller
     public function login(LoginRequest $request)
     {
         $credentials = [
-            'user-agent'=>$request->header('user-agent'),
-            'x-forwarded-for'=>$request->header('x-forwarded-for'),
             'email' => $request->email,
             'password' => $request->password
         
